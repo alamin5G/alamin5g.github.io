@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Sortify — Coming Soon (August 2025)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description"
+        content="Sortify: Your Smart Waste Buddy — AI-powered waste sorting, tips, rewards. Launching August 2025." />
+    <meta property="og:title" content="Sortify — Coming Soon" />
+    <meta property="og:description"
+        content="AI-powered waste classification for a cleaner Bangladesh. Launching August 2025." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sortify.top" />
+    <style>
+        :root {
+            --bg: #0f1115;
+            --fg: #eaf7ee;
+            --muted: #bde5c8;
+            --accent: #43a047;
+            --accent2: #2e7d32;
+            --glass: rgba(255, 255, 255, .08);
+            --white: #fff;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+            color: var(--fg);
+            background:
+                radial-gradient(1200px 800px at 10% -10%, #3fd07a22, transparent 60%),
+                radial-gradient(900px 600px at 110% 10%, #2bb67322, transparent 60%),
+                linear-gradient(135deg, #0b0e13 0%, #121821 60%, #0f1115 100%);
+            display: grid;
+            place-items: center;
+            padding: 32px;
+        }
+
+        .card {
+            width: min(880px, 95vw);
+            border-radius: 24px;
+            border: 1px solid #ffffff18;
+            background: linear-gradient(160deg, #1a222b99, #121821cc);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 40px #00000088, inset 0 0 0 1px #ffffff0f;
+            padding: clamp(20px, 4vw, 40px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: 1px solid #ffffff22;
+            background: #0f1115aa;
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: var(--white);
+            font-weight: 900;
+            font-size: 22px;
+            box-shadow: 0 10px 20px #2e7d3255, inset 0 0 8px #ffffff22;
+        }
+
+        h1 {
+            margin: 18px 0 10px;
+            font-size: clamp(28px, 5vw, 44px);
+            line-height: 1.1;
+            letter-spacing: .2px;
+        }
+
+        .sub {
+            color: #cfe8d7;
+            font-size: clamp(16px, 2.2vw, 18px);
+            line-height: 1.6;
+            margin: 0 0 18px;
+        }
+
+        .pill {
+            display: inline-flex;
+            gap: 6px;
+            align-items: center;
+            padding: 10px 14px;
+            border-radius: 999px;
+            border: 1px dashed #ffffff2a;
+            color: #d7f3de;
+            font-size: 14px;
+            background: #0f1115aa;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin: 24px 0 10px;
+        }
+
+        .grid .tile {
+            border-radius: 16px;
+            border: 1px solid #ffffff18;
+            background: var(--glass);
+            padding: 16px 16px 14px;
+        }
+
+        .tile h3 {
+            margin: 0 0 6px;
+            font-size: 16px;
+        }
+
+        .tile p {
+            margin: 0;
+            color: #cfe8d7;
+            font-size: 14px;
+            line-height: 1.55;
+        }
+
+        .cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .btn {
+            padding: 12px 18px;
+            border-radius: 12px;
+            border: 1px solid #ffffff22;
+            text-decoration: none;
+            color: var(--white);
+            transition: .22s transform ease, .22s box-shadow ease, .22s background ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            box-shadow: 0 10px 24px #2e7d3260;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 26px #00000066
+        }
+
+        .note {
+            margin-top: 12px;
+            color: #a6d5b3;
+            font-size: 13px
+        }
+
+        .iubat {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #bde5c8;
+        }
+
+        footer {
+            margin-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            color: #a5c9b1;
+            font-size: 13px;
+            border-top: 1px dashed #ffffff22;
+            padding-top: 16px;
+        }
+
+        @media(min-width:760px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Subtle floating gradient orb */
+        .orb {
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            background: radial-gradient(closest-side, #67ffb5, transparent);
+            filter: blur(40px);
+            opacity: .12;
+            top: -60px;
+            right: -80px;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="card">
+        <div class="orb"></div>
+        <span class="chip">🌱 Sortify • Your Smart Waste Buddy</span>
+
+        <div class="logo">
+            <div class="logo-icon">S</div>
+            <div style="font-weight:800; font-size:18px; letter-spacing:.2px">Sortify</div>
+        </div>
+
+        <h1>We’re going live in <span style="color:#a5f4c5">August 2025</span> 🎉</h1>
+        <p class="sub">
+            We, <strong>The IUBAT Duo</strong>, are polishing the gradients and fine‑tuning our AI so you can
+            just <em>snap it → sort it → save the planet</em>. Sortify helps you classify waste,
+            learn best practices, and earn rewards for greener habits.
+        </p>
+
+        <span class="pill">⚙️ Current status: Finalizing AI model • Cloud deploy prep</span>
+
+        <section class="grid">
+            <div class="tile">
+                <h3>📸 AI Waste Classification</h3>
+                <p>Upload a photo; get instant bin suggestions (Recycle, Compost, General, Hazardous) with confidence
+                    scores.</p>
+            </div>
+            <div class="tile">
+                <h3>📚 Educational Tips</h3>
+                <p>Contextual, Bangladesh‑friendly tips to reduce contamination and improve sorting at home, office, or
+                    campus.</p>
+            </div>
+            <div class="tile">
+                <h3>🏅 Rewards & Leaderboard</h3>
+                <p>Earn points, unlock badges, and climb the “Top Green Warriors” leaderboard for your eco‑actions.</p>
+            </div>
+        </section>
+
+        <div class="cta">
+            <a class="btn btn-primary" href="mailto:21303134@iubat.edu" aria-label="Contact the team">
+                ✉️ Contact Us
+            </a>
+            <a class="btn" href="https://github.com/alamin5g" target="_blank" rel="noopener">⭐ Follow our build on
+                GitHub</a>
+        </div>
+        <p class="note">Proud entry for Therap Javafest 2025 • Built with Spring Boot, React, and AI.</p>
+        <p class="iubat">Team: <strong>The IUBAT Duo</strong> — Md Alamin &amp; Saikat Kumar Gain</p>
+
+        <footer>
+            <div>©
+                <script>document.write(new Date().getFullYear())</script> Sortify
+            </div>
+            <div>Launching on <strong>sortify.top</strong></div>
+        </footer>
+    </main>
+</body>
+
+</html>
