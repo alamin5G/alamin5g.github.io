@@ -22,7 +22,7 @@ flowchart TB
   R_CORE --- FW_EDGE
 
   %% Distribution routers
-  R_DIST_12_13([R-DIST-12_13\n(12th+13th Floors)]):::dist
+  R_DIST_12_13([R-DIST-12-13\n(12th+13th Floors)]):::dist
   R_DIST_OTHERS([R-DIST-OTHERS\n(Other Floors)]):::dist
   R_CORE --- R_DIST_12_13
   R_CORE --- R_DIST_OTHERS
@@ -92,7 +92,7 @@ flowchart TB
 **Legend:**  
 - **FW/EDGE**: Firewall/NAT, Internet edge; DMZ publishing and policy enforcement.  
 - **R-CORE**: Core routing; connects distribution routers.  
-- **R-DIST-12_13**: Distribution for 12th & 13th floors.  
+- **R-DIST-12-13**: Distribution for 12th & 13th floors.  
 - **SW12-DIST**: L3 switch (SVIs for VLAN10/20/30/40).  
 - **SW12-E / SW12-W**: Access switches for the 12th floor East/West zones.  
 - **AP-13**: Dual SSID – Guest (VLAN50), Employee (VLAN60).  
@@ -107,10 +107,10 @@ flowchart LR
 
   VLAN10([VLAN 10\nAdmin]):::vlan
   VLAN20([VLAN 20\nFaculty/Staff]):::vlan
-  VLAN30([VLAN 30\nStudents\n(Labs 1–12)]):::vlan
+  VLAN30([VLAN 30\nStudents\n(Labs 1-12)]):::vlan
   VLAN40([VLAN 40\nServers / DMZ]):::vlan
-  VLAN50([VLAN 50\nGuest Wi‑Fi]):::wifi
-  VLAN60([VLAN 60\nEmployee Wi‑Fi]):::wifi
+  VLAN50([VLAN 50\nGuest Wi-Fi]):::wifi
+  VLAN60([VLAN 60\nEmployee Wi-Fi]):::wifi
 
   CSE([CSE Dept]):::dept
   EEE([EEE Dept]):::dept
@@ -129,8 +129,8 @@ flowchart LR
 **Notes:**  
 - Departments consume services across VLANs depending on role: Admin/Faculty have broader access; Students primarily use **VLAN30** (labs).  
 - **VLAN40** hosts shared services (e.g., authentication, DNS/HTTP for labs).  
-- **Guest Wi‑Fi (VLAN50)** is internet‑only and isolated from internal networks.  
-- **Employee Wi‑Fi (VLAN60)** has limited, policy-driven access to internal services.
+- **Guest Wi-Fi (VLAN50)** is internet-only and isolated from internal networks.  
+- **Employee Wi-Fi (VLAN60)** has limited, policy-driven access to internal services.
 
 ## Export Tips (draw.io / diagrams.net)
 1. Open **diagrams.net** → **Arrange → Insert → Advanced → Mermaid**.  
@@ -139,7 +139,7 @@ flowchart LR
 4. Replace labels/IPs as needed (e.g., add exact SVI addresses, link labels, or counts).  
 
 ## Next Edits You Might Want
-- Add **exact port/channel labels** between R-DIST-12_13 ↔ SW13-DIST (trunk allowing VLANs 50/60).  
+- Add **exact port/channel labels** between R-DIST-12-13 ↔ SW13-DIST (trunk allowing VLANs 50/60).  
 - Annotate **SVI gateway IPs** for VLAN10/20/30/40 on SW12-DIST.  
 - Add **/30 inter-router links** (10.12.254.x/30) as edge labels for completeness.  
 - If required by rubric, show **redundant uplinks** (spanning tree) and **QoS markers** (e.g., VoIP priority).
