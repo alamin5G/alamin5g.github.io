@@ -105,8 +105,8 @@ const EnhancedSkillsSection = ({ skillLevels }) => {
                                 key={key}
                                 onClick={() => setActiveCategory(key)}
                                 className={`flex items-center gap-3 px-6 py-3 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 ${activeCategory === key
-                                        ? `bg-gradient-to-r ${category.gradient} text-white shadow-lg shadow-${category.color}-500/30`
-                                        : `bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 shadow-md`
+                                    ? `bg-gradient-to-r ${category.gradient} text-white shadow-lg shadow-${category.color}-500/30`
+                                    : `bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 shadow-md`
                                     }`}
                             >
                                 <Icon className="w-5 h-5" />
