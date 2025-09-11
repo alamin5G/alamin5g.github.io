@@ -18,7 +18,7 @@ import StrengthsSection from './components/StrengthsSection';
 import ThemeToggle from './components/ThemeToggle';
 import TiltImage from './components/TiltImage';
 import TypewriterEffect from './components/TypewriterEffect';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 
@@ -36,6 +36,22 @@ import './styles/strengths.css';
 const App = () => {
   const [showAIPortfolio, setShowAIPortfolio] = useState(false);
   const [showAIModal, setShowAIModal] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
+
+  // Auto-show modal on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 200 && !hasScrolled && !showAIPortfolio) {
+        setHasScrolled(true);
+        setTimeout(() => {
+          setShowAIModal(true);
+        }, 1000); // Show modal 1 second after scroll
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [hasScrolled, showAIPortfolio]);
 
   // Toggle function for switching between portfolios
   const togglePortfolio = () => {
@@ -216,7 +232,7 @@ const App = () => {
       technologies: ["Python", "TensorFlow", "Keras", "FastAPI", "React.js", "Computer Vision", "Machine Learning", "Docker", "HTML5", "CSS3"],
       githubUrl: "https://github.com/alamin5G/Sortify",
       liveUrl: "https://sortify.top/",
-      image: "/images/sortify-preview.png", // You can add this image later
+      image: "https://sortify.top/static/media/logo.png", // Using Sortify's logo as preview
       featured: true
     },
     {
@@ -445,18 +461,17 @@ const App = () => {
       {/* Portfolio Toggle Button */}
       <button
         onClick={togglePortfolio}
-        className={`fixed top-4 right-4 z-50 px-4 py-2 rounded-full font-bold text-white transition-all duration-300 transform hover:scale-105 shadow-lg ${
-          showAIPortfolio 
-            ? 'bg-indigo-600 hover:bg-indigo-700' 
+        className={`fixed top-4 right-4 z-50 px-4 py-2 rounded-full font-bold text-white transition-all duration-300 transform hover:scale-105 shadow-lg ${showAIPortfolio
+            ? 'bg-indigo-600 hover:bg-indigo-700'
             : 'bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700'
-        }`}
+          }`}
         style={{ zIndex: 9999 }}
       >
         {showAIPortfolio ? '🏠 Back to Portfolio' : '🤖 Try AI Experience'}
       </button>
 
       {/* AI Portfolio Modal */}
-      <AIPortfolioModal 
+      <AIPortfolioModal
         isOpen={showAIModal}
         onClose={handleAIModalClose}
         onConfirm={handleAIModalConfirm}
