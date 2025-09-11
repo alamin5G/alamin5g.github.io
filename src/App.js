@@ -1,10 +1,12 @@
 import { Brain, Briefcase, Code, Database, GraduationCap, Lightbulb } from 'lucide-react';
 import AIPortfolio from './components/AIPortfolio';
+import AIPortfolioModal from './components/AIPortfolioModal';
 import AnimatedName from './components/AnimatedName';
 import ButterflyEffect from './components/ButterflyEffect';
 import CertificatesSection from './components/CertificatesSection';
 import ContactFloatingElements from './components/ContactFloatingElements';
 import ContactForm from './components/ContactForm';
+import EnhancedSkillsSection from './components/EnhancedSkillsSection';
 import FloatingIcons from './components/FloatingIcons';
 import Footer from './components/Footer';
 import InteractiveSkill from './components/InteractiveSkill';
@@ -33,10 +35,24 @@ import './styles/strengths.css';
 
 const App = () => {
   const [showAIPortfolio, setShowAIPortfolio] = useState(false);
+  const [showAIModal, setShowAIModal] = useState(false);
 
   // Toggle function for switching between portfolios
   const togglePortfolio = () => {
-    setShowAIPortfolio(!showAIPortfolio);
+    if (!showAIPortfolio) {
+      setShowAIModal(true);
+    } else {
+      setShowAIPortfolio(false);
+    }
+  };
+
+  const handleAIModalConfirm = () => {
+    setShowAIModal(false);
+    setShowAIPortfolio(true);
+  };
+
+  const handleAIModalClose = () => {
+    setShowAIModal(false);
   };
 
 
@@ -184,6 +200,25 @@ const App = () => {
   ];
 
   const projects = [
+    {
+      name: "Sortify - AI-Powered Waste Classification System",
+      organization: "Personal Project",
+      duration: "08/2024 - Present",
+      location: "Dhaka, Bangladesh",
+      description: [
+        "Developed an intelligent waste classification system using Computer Vision and Machine Learning.",
+        "Built a full-stack application with React frontend and Python FastAPI backend.",
+        "Implemented TensorFlow/Keras models for real-time waste detection and sorting guidance.",
+        "Created user-friendly interface for waste image upload and instant classification results.",
+        "Deployed the application with Docker containerization for scalable production environment.",
+        "Integrated responsive design for seamless experience across all devices."
+      ],
+      technologies: ["Python", "TensorFlow", "Keras", "FastAPI", "React.js", "Computer Vision", "Machine Learning", "Docker", "HTML5", "CSS3"],
+      githubUrl: "https://github.com/alamin5G/Sortify",
+      liveUrl: "https://sortify.top/",
+      image: "/images/sortify-preview.png", // You can add this image later
+      featured: true
+    },
     {
       name: "Gold Lab Management System",
       organization: "International University of Business Agriculture and Technology",
@@ -410,16 +445,22 @@ const App = () => {
       {/* Portfolio Toggle Button */}
       <button
         onClick={togglePortfolio}
-        className={`fixed top-4 right-4 z-50 px-4 py-2 rounded-full font-bold text-white transition-all duration-300 transform hover:scale-105 shadow-lg ${showAIPortfolio
-            ? 'bg-indigo-600 hover:bg-indigo-700'
-            : 'bg-green-600 hover:bg-green-700'
-          }`}
+        className={`fixed top-4 right-4 z-50 px-4 py-2 rounded-full font-bold text-white transition-all duration-300 transform hover:scale-105 shadow-lg ${
+          showAIPortfolio 
+            ? 'bg-indigo-600 hover:bg-indigo-700' 
+            : 'bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700'
+        }`}
         style={{ zIndex: 9999 }}
       >
-        {showAIPortfolio ? '🏠 Static Portfolio' : '🤖 AI Portfolio'}
+        {showAIPortfolio ? '🏠 Back to Portfolio' : '🤖 Try AI Experience'}
       </button>
 
-      {/* Conditional rendering based on portfolio mode */}
+      {/* AI Portfolio Modal */}
+      <AIPortfolioModal 
+        isOpen={showAIModal}
+        onClose={handleAIModalClose}
+        onConfirm={handleAIModalConfirm}
+      />      {/* Conditional rendering based on portfolio mode */}
       {showAIPortfolio ? (
         <AIPortfolio />
       ) : (
@@ -520,67 +561,9 @@ const App = () => {
 
 
 
-            {/* Update the Skills section to use Interactive Skills */}
-
-
-            {/* --- My Skills Section (Interactive Only) --- */}
-            <section id="skills" className="py-16 md:py-24 bg-gray-100 dark:bg-gray-800 p-4 relative z-10">
-              <div className="container mx-auto max-w-4xl relative">
-                <div className="bubble absolute -top-10 -left-10 w-20 h-20 bg-indigo-500/10 rounded-full"></div>
-                <div className="bubble absolute top-1/2 -right-10 w-32 h-32 bg-purple-500/10 rounded-full" style={{ animationDelay: "2s" }}></div>
-
-                <h2 className="text-4xl font-bold text-center text-indigo-700 dark:text-indigo-400 mb-12">My Skills</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                  {/* Programming Skills */}
-                  <div className="bg-white dark:bg-gray-850 p-6 rounded-lg shadow-lg hover-lift transition-all duration-300">
-                    <h3 className="text-2xl font-semibold text-indigo-600 dark:text-indigo-400 mb-4 capitalize flex items-center">
-                      <Code className="w-6 h-6 mr-2" />
-                      Programming Skills
-                    </h3>
-                    <div className="space-y-4">
-                      {skillLevels.programming && Object.entries(skillLevels.programming).map(([skill, level], idx) => (
-                        <InteractiveSkill key={idx} skill={skill} level={level} icon={Code} color="indigo" />
-                      ))}
-                    </div>
-                  </div>
-                  {/* Frameworks Skills */}
-                  <div className="bg-white dark:bg-gray-850 p-6 rounded-lg shadow-lg hover-lift transition-all duration-300">
-                    <h3 className="text-2xl font-semibold text-indigo-600 dark:text-indigo-400 mb-4 capitalize flex items-center">
-                      <Lightbulb className="w-6 h-6 mr-2" />
-                      Frameworks Skills
-                    </h3>
-                    <div className="space-y-4">
-                      {skillLevels.frameworks && Object.entries(skillLevels.frameworks).map(([skill, level], idx) => (
-                        <InteractiveSkill key={idx} skill={skill} level={level} icon={Lightbulb} color="purple" />
-                      ))}
-                    </div>
-                  </div>
-                  {/* Databases Skills */}
-                  <div className="bg-white dark:bg-gray-850 p-6 rounded-lg shadow-lg hover-lift transition-all duration-300">
-                    <h3 className="text-2xl font-semibold text-indigo-600 dark:text-indigo-400 mb-4 capitalize flex items-center">
-                      <Database className="w-6 h-6 mr-2" />
-                      Database Skills
-                    </h3>
-                    <div className="space-y-4">
-                      {skillLevels.databases && Object.entries(skillLevels.databases).map(([skill, level], idx) => (
-                        <InteractiveSkill key={idx} skill={skill} level={level} icon={Database} color="blue" />
-                      ))}
-                    </div>
-                  </div>
-                  {/* AI/ML Skills */}
-                  <div className="bg-white dark:bg-gray-850 p-6 rounded-lg shadow-lg hover-lift transition-all duration-300">
-                    <h3 className="text-2xl font-semibold text-indigo-600 dark:text-indigo-400 mb-4 capitalize flex items-center">
-                      <Brain className="w-6 h-6 mr-2" />
-                      AI/ML Skills
-                    </h3>
-                    <div className="space-y-4">
-                      {skillLevels.ai_ml && Object.entries(skillLevels.ai_ml).map(([skill, level], idx) => (
-                        <InteractiveSkill key={idx} skill={skill} level={level} icon={Brain} color="teal" />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
+            {/* Enhanced Skills Section */}
+            <section id="skills">
+              <EnhancedSkillsSection skillLevels={skillLevels} />
             </section>
 
             {/* Experience Section */}
