@@ -1,0 +1,464 @@
+
+/* Hover card effect */
+.hover-card {
+  transition: all 0.3s ease-in-out;
+}
+
+.hover-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Timeline item animation */
+.timeline-item:hover .hover-card {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 10px 25px rgba(79, 70, 229, 0.15);
+}
+
+/* Reveal text animation */
+.reveal-text {
+  position: relative;
+  overflow: hidden;
+}
+
+.reveal-text::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f9fafb;
+  transform: translateX(-100%);
+  animation: revealText 1.5s ease forwards;
+}
+
+@media (prefers-color-scheme: dark) {
+  .reveal-text::after {
+    background-color: #1f2937;
+  }
+}
+
+@keyframes revealText {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Stat bar progress animation */
+.stat-bar-progress {
+  width: 0;
+  transition: width 1s ease-out;
+}
+
+/* Bubble animations */
+.bubble {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translatey(0px);
+  }
+  50% {
+    transform: translatey(-20px);
+  }
+  100% {
+    transform: translatey(0px);
+  }
+}
+
+/* Hover lift effect for cards */
+.hover-lift {
+  transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.hover-lift {
+  transition: transform 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+}
+
+.bg-gradient-animated {
+  background: linear-gradient(-45deg, #6366f1, #8b5cf6, #3b82f6, #06b6d4);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Bubble animation for skill section */
+.bubble {
+  opacity: 0.7;
+  animation: bubble-float 8s ease-in-out infinite;
+}
+
+@keyframes bubble-float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.1);
+  }
+}
+
+/* Fancy underline animation for nav links */
+.fancy-underline {
+  position: relative;
+}
+
+.fancy-underline::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background-color: currentColor;
+  transition: all 0.3s ease;
+}
+
+.fancy-underline:hover::after {
+  width: 80%;
+  left: 10%;
+}
+
+/* Enhanced Hover Card for Contact Form */
+.contact-card {
+  transition: all 0.3s ease-in-out;
+  border: 1px solid transparent; /* Prepare for gradient border */
+}
+
+.contact-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15), 0 0 0 4px rgba(99, 102, 241, 0.2); /* Indigo shadow */
+  border-image: linear-gradient(to right, #6366f1, #8b5cf6) 1;
+}
+
+.contact-card .contact-icon-wrapper {
+  transition: transform 0.3s ease;
+}
+
+.contact-card:hover .contact-icon-wrapper {
+  transform: scale(1.1);
+}
+
+/* Gradient text for headings */
+.text-gradient-indigo-purple {
+  background: linear-gradient(to right, #6366f1, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+/* Enhanced button styles */
+.btn-copy {
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-copy:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.btn-copy.copied {
+  background: linear-gradient(to right, #4ade80, #22d3ee); /* Green to Cyan */
+  color: white;
+}
+.btn-copy.copied::after {
+  content: '✓';
+  margin-left: 4px;
+}
+
+
+/* Enhanced "Email Me Now" button */
+.btn-email-now {
+  transition: all 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px 0 rgba(120, 83, 219, 0.55); /* Purple shadow */
+}
+
+.btn-email-now:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 25px 0 rgba(120, 83, 219, 0.75);
+}
+
+/* Reference Card Enhancements */
+.reference-card {
+  transition: all 0.3s ease-in-out;
+  border-left-width: 4px;
+  border-left-color: transparent; /* Start transparent */
+}
+
+.reference-card.hovered {
+  border-left-image: linear-gradient(to bottom, #6366f1, #8b5cf6) 1;
+  transform: translateX(5px) scale(1.01);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.reference-card .reference-icon {
+  transition: transform 0.3s ease;
+}
+.reference-card:hover .reference-icon {
+  transform: scale(1.2);
+}
+
+/* Floating animations for contact icons */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes float-slow {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(5deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 8s ease-in-out infinite;
+}
+
+/* Add these animations to your animations.css file */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes pulse-slow {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
+.animate-pulse {
+  animation: pulse-slow 8s ease-in-out infinite;
+}
+
+/* Card hover effects */
+.hobby-card-wrapper:hover {
+  z-index: 10;
+}
+
+/* Improve the group hover functionality */
+.hobby-card:hover .hobby-card-content {
+  transform: translateY(0);
+}
+
+/* Card flip animation */
+.perspective-500 {
+  perspective: 1000px;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+.hobby-card-wrapper {
+  height: 350px; /* Adjust this value as needed */
+}
+
+.card-inner, .card-front, .card-back, .hobby-card {
+  height: 100%;
+}
+
+/* Improve background contrast in dark mode */
+
+
+/* Ensure text is visible regardless of theme */
+.hobby-card-content {
+  @apply backdrop-blur-sm;
+}
+/* Improve background contrast in dark mode */
+
+
+/* Ensure text is visible regardless of theme */
+.hobby-card-content {
+  @apply backdrop-blur-sm;
+}
+
+/* Dark mode fixes for hobby cards */
+.dark .hobby-card {
+  @apply bg-gray-800; /* Dark background in dark mode */
+}
+
+.dark .hobby-card h3 {
+  @apply text-white; /* White headings in dark mode */
+}
+
+.dark .hobby-card p {
+  @apply text-gray-300; /* Light gray text in dark mode */
+}
+
+/* Ensure front card text is visible in dark mode */
+.dark .card-front .hobby-card h3 {
+  @apply text-white;
+}
+
+.dark .card-front .hobby-card p {
+  @apply text-gray-300;
+}
+
+/* Ensure proper background contrast for content */
+.dark .hobby-card .p-6 {
+  @apply bg-gray-800;
+}
+
+/* Add to your animations.css file */
+
+/* Gradient shadows for hobby cards */
+.gradient-shadow {
+  position: relative;
+}
+
+/* Light mode gradient shadows */
+.gradient-shadow::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #6366f1, #8b5cf6, #ec4899, #f97316);
+  border-radius: 1rem;
+  z-index: -1;
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+}
+
+/* Shadow becomes more visible on hover */
+.gradient-shadow:hover::before {
+  opacity: 0.7;
+}
+
+/* Dark mode specific gradient shadow */
+.dark .gradient-shadow::before {
+  background: linear-gradient(45deg, #818cf8, #a78bfa, #f472b6, #fb923c);
+  opacity: 0.25;
+}
+
+.dark .gradient-shadow:hover::before {
+  opacity: 0.5;
+}
+
+/* Color-specific gradient shadows (optional) */
+.hobby-card:nth-child(4n+1) .gradient-shadow::before {
+  background: linear-gradient(45deg, #6366f1, #8b5cf6);
+}
+
+.hobby-card:nth-child(4n+2) .gradient-shadow::before {
+  background: linear-gradient(45deg, #10b981, #14b8a6);
+}
+
+.hobby-card:nth-child(4n+3) .gradient-shadow::before {
+  background: linear-gradient(45deg, #f43f5e, #ec4899);
+}
+
+.hobby-card:nth-child(4n+4) .gradient-shadow::before {
+  background: linear-gradient(45deg, #f59e0b, #f97316);
+}
+

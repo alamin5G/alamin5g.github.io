@@ -1,0 +1,71 @@
+/* Remove both existing border gradient classes and replace with this */
+
+/* Main card styling - without any transforms that could cause mirroring */
+.project-card {
+  transform-style: preserve-3d;
+  cursor: pointer;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+/* Border animation - completely rewritten */
+.project-card .border-effect {
+  position: absolute;
+  inset: 0;
+  border: 2px solid transparent;
+  border-radius: 0.75rem;
+  background-clip: padding-box;
+  z-index: 0;
+}
+
+/* Create the border gradient using a separate pseudo-element */
+.project-card .border-effect::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(
+    45deg, 
+    var(--gradient-start, #9333ea), 
+    var(--gradient-end, #d946ef)
+  );
+  background-size: 300% 300%;
+  animation: gradient-shift 6s ease infinite;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* Show the border gradient on hover */
+.project-card:hover .border-effect::before {
+  opacity: 0.1;
+}
+
+/* Remove all other border-gradient classes */
+.border-gradient,
+.border-gradient::before,
+.border-gradient-wrapper {
+  display: none;
+}
+
+.projects-title {
+  font-size: 2.5rem; /* Adjust as needed */
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem; /* Adjust as needed */
+}
+
+.projects-title-gradient {
+  background: linear-gradient(
+    90deg,
+    var(--gradient-start, #9333ea),
+    var(--gradient-end, #d946ef),
+    var(--gradient-start, #9333ea)
+  );
+  background-size: 200% auto;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: gradient-shift 5s ease infinite;
+}

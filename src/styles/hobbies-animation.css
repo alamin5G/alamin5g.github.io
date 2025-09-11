@@ -1,0 +1,241 @@
+/* Card flip mechanics */
+.perspective-500 {
+  perspective: 1000px;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Make sure backfaces are truly hidden and not transparent */
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Fixed rotation classes */
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Force solid backgrounds to prevent transparency */
+.card-front .hobby-card {
+  background-color: #fff !important;
+}
+
+.dark .card-front .hobby-card {
+  background-color: #1f2937 !important; /* dark:bg-gray-800 */
+}
+
+.card-back .hobby-card {
+  background-color: #fff !important;
+}
+
+.dark .card-back .hobby-card {
+  background-color: #374151 !important; /* dark:bg-gray-700 - lighter for better contrast */
+}
+
+/* Better text visibility in dark mode */
+.dark .card-back h3 {
+  color: rgb(129, 140, 248) !important; /* indigo-400 */
+}
+
+.dark .card-back p {
+  color: rgb(229, 231, 235) !important; /* gray-200 */
+}
+
+/* Fixed card height to avoid sizing issues */
+.hobby-card-wrapper {
+  height: 350px;
+}
+
+.hobby-card, .card-front, .card-back {
+  height: 100%;
+}
+
+/* Gradient Border Animation - Works for both front and back cards */
+.hobby-card {
+  position: relative;
+  border-radius: 0.75rem;
+}
+
+/* Common gradient border for all cards */
+.hobby-card::before {
+  content: '';
+  position: absolute;
+  inset: -3px; /* Creates border around the card */
+  border-radius: 0.75rem;
+  background-size: 300% 300%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+  animation: borderGradient 3s linear infinite;
+}
+
+/* Make gradient visible on hover */
+.hobby-card:hover::before {
+  opacity: 1;
+}
+
+/* Specific gradients based on card index */
+.hobby-card-wrapper:nth-child(4n+1) .card-front .hobby-card::before,
+.hobby-card-wrapper:nth-child(4n+1) .card-back .hobby-card::before {
+  background: linear-gradient(45deg, 
+    rgba(99, 102, 241, 0.8), /* indigo-500 */
+    rgba(139, 92, 246, 0.8), /* purple-500 */
+    rgba(99, 102, 241, 0.8)  /* indigo-500 */
+  );
+}
+
+.hobby-card-wrapper:nth-child(4n+2) .card-front .hobby-card::before,
+.hobby-card-wrapper:nth-child(4n+2) .card-back .hobby-card::before {
+  background: linear-gradient(45deg, 
+    rgba(16, 185, 129, 0.8),  /* green-500 */
+    rgba(20, 184, 166, 0.8),  /* teal-500 */
+    rgba(16, 185, 129, 0.8)   /* green-500 */
+  );
+}
+
+.hobby-card-wrapper:nth-child(4n+3) .card-front .hobby-card::before,
+.hobby-card-wrapper:nth-child(4n+3) .card-back .hobby-card::before {
+  background: linear-gradient(45deg, 
+    rgba(244, 63, 94, 0.8),   /* rose-500 */
+    rgba(236, 72, 153, 0.8),  /* pink-500 */
+    rgba(244, 63, 94, 0.8)    /* rose-500 */
+  );
+}
+
+.hobby-card-wrapper:nth-child(4n+4) .card-front .hobby-card::before,
+.hobby-card-wrapper:nth-child(4n+4) .card-back .hobby-card::before {
+  background: linear-gradient(45deg, 
+    rgba(245, 158, 11, 0.8),  /* amber-500 */
+    rgba(249, 115, 22, 0.8),  /* orange-500 */
+    rgba(245, 158, 11, 0.8)   /* amber-500 */
+  );
+}
+
+/* Moving gradient animation */
+@keyframes borderGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Fix for back button in dark mode */
+.dark .card-back button {
+  background-color: rgba(99, 102, 241, 0.2) !important;
+  color: rgb(165, 180, 252) !important;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.dark .card-back button:hover {
+  background-color: rgba(99, 102, 241, 0.4) !important;
+}
+
+/* Make gradients work on touch devices */
+@media (hover: none) {
+  .hobby-card::before {
+    opacity: 0.6;
+  }
+}
+
+/* Gradient Text Animation for Back Card Titles */
+.card-back h3 {
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-size: 200% auto;
+  animation: textGradient 3s linear infinite;
+  transition: all 0.3s ease;
+}
+
+/* Different gradient text colors based on card index */
+.hobby-card-wrapper:nth-child(4n+1) .card-back h3 {
+  background-image: linear-gradient(45deg, #6366f1, #a5b4fc, #6366f1);
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+}
+
+.hobby-card-wrapper:nth-child(4n+2) .card-back h3 {
+  background-image: linear-gradient(45deg, #10b981, #5eead4, #10b981);
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+}
+
+.hobby-card-wrapper:nth-child(4n+3) .card-back h3 {
+  background-image: linear-gradient(45deg, #f43f5e, #fda4af, #f43f5e);
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+}
+
+.hobby-card-wrapper:nth-child(4n+4) .card-back h3 {
+  background-image: linear-gradient(45deg, #f59e0b, #fcd34d, #f59e0b);
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+}
+
+/* Gradient text animation */
+@keyframes textGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Override dark mode text color since we're using gradient text now */
+.dark .card-back h3 {
+  color: transparent !important;
+}
+
+/* Add gradient animation to front card titles */
+.card-front h3 {
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-size: 200% auto;
+  animation: textGradient 3s linear infinite;
+  transition: all 0.3s ease;
+}
+
+/* Different gradient text colors for front cards based on card index */
+.hobby-card-wrapper:nth-child(4n+1) .card-front h3 {
+  background-image: linear-gradient(45deg, #6366f1, #a5b4fc, #6366f1);
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+}
+
+.hobby-card-wrapper:nth-child(4n+2) .card-front h3 {
+  background-image: linear-gradient(45deg, #10b981, #5eead4, #10b981);
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+}
+
+.hobby-card-wrapper:nth-child(4n+3) .card-front h3 {
+  background-image: linear-gradient(45deg, #f43f5e, #fda4af, #f43f5e);
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+}
+
+.hobby-card-wrapper:nth-child(4n+4) .card-front h3 {
+  background-image: linear-gradient(45deg, #f59e0b, #fcd34d, #f59e0b);
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+}
+
+/* Override dark mode text color for front card titles */
+.dark .card-front h3 {
+  color: transparent !important;
+}
