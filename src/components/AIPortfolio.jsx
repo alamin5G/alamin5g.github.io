@@ -121,11 +121,15 @@ const AIPortfolio = () => {
         if (normalized === 'cv' || normalized === 'resume') {
             setOutput(prev => [
                 ...prev,
-                { text: 'CV/Resume Information:', type: 'system' },
-                { text: '• Download Link: /resume/cv_Md_Alamin.pdf', type: 'system' },
-                { text: '• Contains: Work experience, education, projects, skills', type: 'system' },
-                { text: '• Format: Professional PDF suitable for applications', type: 'system' },
-                { text: '• Last Updated: January 2025', type: 'system' },
+                { text: 'CV Download Available:', type: 'system' },
+                { text: 'Direct Link: https://alamin5g.com/resume/cv_Md_Alamin.pdf', type: 'system' },
+                { text: '', type: 'empty' },
+                { text: 'This comprehensive CV includes:', type: 'system' },
+                { text: '• Complete work experience and achievements', type: 'system' },
+                { text: '• Educational background with academic records', type: 'system' },
+                { text: '• Technical skills and certifications', type: 'system' },
+                { text: '• Major projects with implementation details', type: 'system' },
+                { text: '• Contact information and references', type: 'system' },
                 { text: '', type: 'empty' },
                 { text: 'Click the link above to download or ask any other questions...', type: 'prompt' }
             ]);
@@ -138,7 +142,7 @@ const AIPortfolio = () => {
         const GEMINI_API_KEY = process.env.REACT_APP_GEMINI_API_KEY;
         const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${GEMINI_API_KEY || ''}`;
 
-        const systemPrompt = `You are an AI assistant representing Md. Alamin, a Java developer and ML enthusiast. You have access to his complete professional information and should answer questions naturally and professionally about his background.
+        const systemPrompt = `You are an AI assistant representing Md. Alamin, a Java developer and ML enthusiast. You have access to his complete professional information and should answer questions in a clean, user-friendly format without markdown styling.
 
     **Professional Information:**
     • Name: Md. Alamin
@@ -189,11 +193,17 @@ const AIPortfolio = () => {
     • Consistent academic excellence and practical project implementation
 
     **CV/Resume Information:**
-    When users ask for CV or resume, provide this information:
-    - CV is available for download at: /resume/cv_Md_Alamin.pdf
-    - Contains detailed work experience, education, projects, and skills
-    - Updated regularly with latest achievements and certifications
-    - Professional format suitable for job applications
+    When users ask for CV or resume, provide this EXACT response:
+    "You can download Alamin's CV directly from: https://alamin5g.com/resume/cv_Md_Alamin.pdf
+    
+    This comprehensive CV includes:
+    - Complete work experience and achievements
+    - Educational background with academic records
+    - Technical skills and certifications
+    - Major projects with implementation details
+    - Contact information and references
+    
+    The CV is regularly updated and formatted professionally for job applications."
 
     **Social Media Profiles:**
     • GitHub: github.com/alamin5g (All public repositories and contributions)
@@ -209,9 +219,12 @@ const AIPortfolio = () => {
     • Various full-stack development projects
 
     **Response Guidelines:**
+    - Always respond in clean, readable text format - NO MARKDOWN FORMATTING
+    - Do not use asterisks, hashtags, or any markdown symbols
+    - Use simple bullet points with dashes or dots
+    - For CV requests, provide the direct download link clearly
     - Be professional and informative in all responses
     - Provide specific details when discussing projects or skills
-    - For CV requests, mention the download link and key highlights
     - Include relevant contact information when appropriate
     - For topics outside this information, politely redirect to Alamin's professional background
     - Available commands: about, projects, skills, experience, education, contact, cv, help, clear
@@ -269,70 +282,86 @@ const AIPortfolio = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-950 to-purple-950 p-4">
-            {/* Subtle background pattern */}
-            <div className="fixed inset-0 opacity-5">
+        <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-900 to-pink-900 p-4 relative overflow-hidden">
+            {/* Dynamic animated background */}
+            <div className="fixed inset-0 opacity-20">
+                {/* Floating particles */}
+                <div className="absolute w-2 h-2 bg-cyan-400 rounded-full animate-pulse" style={{ left: '10%', top: '20%', animationDelay: '0s' }}></div>
+                <div className="absolute w-1 h-1 bg-pink-400 rounded-full animate-ping" style={{ left: '80%', top: '30%', animationDelay: '1s' }}></div>
+                <div className="absolute w-3 h-3 bg-yellow-400 rounded-full animate-bounce" style={{ left: '60%', top: '70%', animationDelay: '2s' }}></div>
+                <div className="absolute w-2 h-2 bg-green-400 rounded-full animate-pulse" style={{ left: '30%', top: '80%', animationDelay: '3s' }}></div>
+                <div className="absolute w-1 h-1 bg-blue-400 rounded-full animate-ping" style={{ left: '90%', top: '60%', animationDelay: '4s' }}></div>
+                <div className="absolute w-2 h-2 bg-purple-400 rounded-full animate-bounce" style={{ left: '20%', top: '40%', animationDelay: '5s' }}></div>
+
+                {/* Geometric shapes */}
+                <div className="absolute w-20 h-20 border border-cyan-400/30 rotate-45 animate-spin-slow" style={{ left: '70%', top: '10%' }}></div>
+                <div className="absolute w-16 h-16 border border-pink-400/30 rounded-full animate-pulse" style={{ left: '10%', top: '60%' }}></div>
+                <div className="absolute w-12 h-12 border-2 border-yellow-400/30 rotate-12 animate-ping" style={{ left: '85%', top: '80%' }}></div>
+
+                {/* Grid pattern overlay */}
                 <div className="absolute inset-0" style={{
-                    backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)`,
-                    backgroundSize: '20px 20px'
+                    backgroundImage: `linear-gradient(rgba(139, 92, 246, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(139, 92, 246, 0.1) 1px, transparent 1px)`,
+                    backgroundSize: '30px 30px'
                 }}></div>
             </div>
 
             <div className="relative z-10 max-w-6xl mx-auto">
                 {/* Header */}
                 <div className="text-center mb-8">
-                    <h1 className="text-4xl font-bold text-white mb-2">Interactive AI Assistant</h1>
-                    <p className="text-slate-400">Powered by Advanced AI • Real-time Portfolio Information</p>
+                    <h1 className="text-5xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-4">
+                        AI Portfolio Assistant
+                    </h1>
+                    <p className="text-slate-300 text-lg">Advanced AI • Real-time Information • Interactive Experience</p>
                 </div>
 
-                <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl shadow-2xl overflow-hidden">
+                <div className="bg-black/40 backdrop-blur-xl border border-purple-500/30 rounded-2xl shadow-2xl shadow-purple-500/20 overflow-hidden">
                     {/* Modern header */}
-                    <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-4">
+                    <div className="bg-gradient-to-r from-cyan-600 via-purple-600 to-pink-600 p-4">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center space-x-3">
-                                <div className="w-3 h-3 bg-white/70 rounded-full"></div>
-                                <div className="w-3 h-3 bg-white/50 rounded-full"></div>
-                                <div className="w-3 h-3 bg-white/30 rounded-full"></div>
-                                <span className="text-white font-semibold ml-4">AI Portfolio Assistant</span>
+                                <div className="w-3 h-3 bg-white/80 rounded-full animate-pulse"></div>
+                                <div className="w-3 h-3 bg-white/60 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+                                <div className="w-3 h-3 bg-white/40 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+                                <span className="text-white font-semibold ml-4">Alamin's AI Assistant</span>
                             </div>
-                            <div className="text-white/80 text-sm font-mono">
+                            <div className="text-white/90 text-sm font-mono bg-white/10 px-3 py-1 rounded-full">
                                 {new Date().toLocaleDateString()} • {new Date().toLocaleTimeString()}
                             </div>
                         </div>
                     </div>
 
                     {/* Chat area */}
-                    <div className="p-6 h-96 overflow-y-auto bg-white/5" ref={terminalBodyRef}>
+                    <div className="p-6 h-96 overflow-y-auto bg-gradient-to-b from-black/20 to-purple-950/20" ref={terminalBodyRef}>
                         {output.map((line, index) => (
                             <div key={index} className="mb-3">
                                 {line.type === 'user' && (
                                     <div className="flex items-start space-x-3 mb-2">
-                                        <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
+                                        <div className="w-10 h-10 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-lg">
                                             U
                                         </div>
-                                        <div className="bg-blue-500/20 border border-blue-500/30 rounded-lg px-4 py-2 max-w-md">
-                                            <span className="text-blue-200">{line.text}</span>
+                                        <div className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-400/30 rounded-xl px-4 py-3 max-w-md shadow-lg">
+                                            <span className="text-cyan-100">{line.text}</span>
                                         </div>
                                     </div>
                                 )}
                                 {(line.type === 'response' || line.type === 'ai') && (
                                     <div className="flex items-start space-x-3 mb-2">
-                                        <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
+                                        <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-lg animate-pulse">
                                             AI
                                         </div>
-                                        <div className="bg-white/10 border border-white/20 rounded-lg px-4 py-2 max-w-2xl">
-                                            <span className="text-white whitespace-pre-wrap">{line.text}</span>
+                                        <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-400/30 rounded-xl px-4 py-3 max-w-2xl shadow-lg">
+                                            <span className="text-white whitespace-pre-wrap leading-relaxed">{line.text}</span>
                                         </div>
                                     </div>
                                 )}
                                 {(line.type === 'system' || line.type === 'prompt') && (
-                                    <div className={`text-center py-1 ${line.type === 'system' ? 'text-slate-300' : 'text-blue-300'
+                                    <div className={`text-center py-1 ${line.type === 'system' ? 'text-purple-200' : 'text-cyan-200'
                                         }`}>
                                         {line.text}
                                     </div>
                                 )}
                                 {line.type === 'error' && (
-                                    <div className="text-red-400 bg-red-900/20 border border-red-500/30 rounded-lg px-4 py-2">
+                                    <div className="text-red-300 bg-red-900/30 border border-red-500/40 rounded-xl px-4 py-3 shadow-lg">
                                         {line.text}
                                     </div>
                                 )}
@@ -342,16 +371,16 @@ const AIPortfolio = () => {
 
                         {isLoading && (
                             <div className="flex items-start space-x-3 mb-2">
-                                <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
+                                <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-lg animate-pulse">
                                     AI
                                 </div>
-                                <div className="bg-white/10 border border-white/20 rounded-lg px-4 py-2">
+                                <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-400/30 rounded-xl px-4 py-3 shadow-lg">
                                     <div className="flex items-center space-x-2">
-                                        <span className="text-white">Thinking</span>
+                                        <span className="text-white">Processing</span>
                                         <div className="flex space-x-1">
                                             <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce"></div>
-                                            <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                                            <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                                            <div className="w-2 h-2 bg-pink-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                                            <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                                         </div>
                                     </div>
                                 </div>
@@ -360,9 +389,9 @@ const AIPortfolio = () => {
                     </div>
 
                     {/* Input area */}
-                    <div className="border-t border-white/20 p-4 bg-white/5">
+                    <div className="border-t border-purple-500/30 p-4 bg-gradient-to-r from-black/30 to-purple-950/30">
                         <div className="flex items-center space-x-4">
-                            <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
+                            <div className="w-10 h-10 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-lg">
                                 U
                             </div>
                             <input
@@ -371,15 +400,15 @@ const AIPortfolio = () => {
                                 value={input}
                                 onChange={handleInputChange}
                                 onKeyDown={handleKeyDown}
-                                className="flex-1 bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-slate-400 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20"
-                                placeholder="Ask me anything about Alamin's portfolio..."
+                                className="flex-1 bg-white/10 border border-purple-400/30 rounded-xl px-4 py-3 text-white placeholder-purple-200 outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 shadow-lg"
+                                placeholder="Ask me anything about Alamin's professional background..."
                                 disabled={isLoading}
                                 autoFocus
                             />
                             <button
                                 onClick={handleSubmit}
                                 disabled={isLoading || !input.trim()}
-                                className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-3 rounded-lg font-medium hover:from-blue-600 hover:to-purple-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                                className="bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-6 py-3 rounded-xl font-medium hover:from-cyan-600 hover:to-purple-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg transform hover:scale-105"
                             >
                                 Send
                             </button>
@@ -387,10 +416,22 @@ const AIPortfolio = () => {
                     </div>
                 </div>
 
-                <div className="mt-6 text-center text-slate-400 text-sm">
+
+                <div className="mt-6 text-center text-purple-200 text-sm">
                     <p>© 2024 Md. Alamin • AI-Powered Portfolio Assistant • Press ESC to return to main portfolio</p>
                 </div>
             </div>
+
+            {/* Custom CSS for animations */}
+            <style jsx>{`
+                @keyframes spin-slow {
+                    from { transform: rotate(0deg); }
+                    to { transform: rotate(360deg); }
+                }
+                .animate-spin-slow {
+                    animation: spin-slow 20s linear infinite;
+                }
+            `}</style>
         </div>
     );
 };
