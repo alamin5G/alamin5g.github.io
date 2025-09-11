@@ -19,8 +19,8 @@ import TypewriterEffect from './components/TypewriterEffect';
 import { useState } from 'react';
 
 
-        
-        // Then replace your certificates section with:
+
+// Then replace your certificates section with:
 
 // Add this import at the top of your App.js
 import './styles/animations.css'; // Ensure this path is correct
@@ -284,24 +284,24 @@ const App = () => {
     }
   ];
 
-  
-const certificates = [
-  {
-    name: "Core Java Specialization",
-    issuer: "Coursera | Learn Quest",
-    date: "01/2025",
-    link: "https://www.coursera.org/account/accomplishments/specialization/1NOUKO7KW6QL",
-    skills: ["Java SE", "OOP", "Collections", "Concurrency"]
-  },
-  {
-    name: "Machine Learning for All",
-    issuer: "Coursera | University of London",
-    date: "02/2025",
-    link: "https://www.coursera.org/account/accomplishments/verify/98V8W7YWFXGD",
-    skills: ["ML Basics", "Python", "Data Analysis"]
-  }
-  // You can easily add more certificates here in the future
-];
+
+  const certificates = [
+    {
+      name: "Core Java Specialization",
+      issuer: "Coursera | Learn Quest",
+      date: "01/2025",
+      link: "https://www.coursera.org/account/accomplishments/specialization/1NOUKO7KW6QL",
+      skills: ["Java SE", "OOP", "Collections", "Concurrency"]
+    },
+    {
+      name: "Machine Learning for All",
+      issuer: "Coursera | University of London",
+      date: "02/2025",
+      link: "https://www.coursera.org/account/accomplishments/verify/98V8W7YWFXGD",
+      skills: ["ML Basics", "Python", "Data Analysis"]
+    }
+    // You can easily add more certificates here in the future
+  ];
 
   const strengths = [
     "Team Collaboration", "Problem-Solving", "Communication Skill", "Commitment to Quality within Deadline"
@@ -406,15 +406,14 @@ const certificates = [
 
   return (
     <div className="font-inter bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 min-h-screen relative">
-      
+
       {/* Portfolio Toggle Button */}
       <button
         onClick={togglePortfolio}
-        className={`fixed top-4 right-4 z-50 px-4 py-2 rounded-full font-bold text-white transition-all duration-300 transform hover:scale-105 shadow-lg ${
-          showAIPortfolio 
-            ? 'bg-indigo-600 hover:bg-indigo-700' 
+        className={`fixed top-4 right-4 z-50 px-4 py-2 rounded-full font-bold text-white transition-all duration-300 transform hover:scale-105 shadow-lg ${showAIPortfolio
+            ? 'bg-indigo-600 hover:bg-indigo-700'
             : 'bg-green-600 hover:bg-green-700'
-        }`}
+          }`}
         style={{ zIndex: 9999 }}
       >
         {showAIPortfolio ? '🏠 Static Portfolio' : '🤖 AI Portfolio'}
@@ -449,385 +448,385 @@ const certificates = [
             </nav>
           </header>
 
-      <main className="pt-20"> {/* Padding for fixed header */}
-        {/* Home Section */}
-        <section id="home" className="relative h-screen flex items-center justify-center text-center bg-gradient-animated text-white p-4">
-          <ButterflyEffect />
+          <main className="pt-20"> {/* Padding for fixed header */}
+            {/* Home Section */}
+            <section id="home" className="relative h-screen flex items-center justify-center text-center bg-gradient-animated text-white p-4">
+              <ButterflyEffect />
 
-          <FloatingIcons />
-          <div className="container mx-auto max-w-4xl">
-            <div className="mb-6">
-              <TiltImage
-                src={profile.image}
-                alt={profile.name}
+              <FloatingIcons />
+              <div className="container mx-auto max-w-4xl">
+                <div className="mb-6">
+                  <TiltImage
+                    src={profile.image}
+                    alt={profile.name}
+                  />
+                </div>
+                <h1 className="text-5xl md:text-6xl font-extrabold mb-4 leading-tight">
+                  Hi, I'm <AnimatedName name={profile.name} />
+                </h1>
+                <p className="text-2xl md:text-3xl font-light mb-8">
+                  <TypewriterEffect
+                    text={roleTitles}
+                    typingSpeed={70}
+                    pauseTime={2000}
+                  />
+                </p>
+
+                <div className="mt-10 space-y-4">
+                  <button
+                    onClick={() => scrollToSection('projects')}
+                    className="px-8 py-3 bg-white text-indigo-600 font-bold rounded-full hover:bg-indigo-100 transition-all duration-300 transform hover:-translate-y-1 shadow-lg mx-2"
+                  >
+                    View My Work
+                  </button>
+
+                  <button
+                    onClick={() => scrollToSection('contact')}
+                    className="px-8 py-3 bg-transparent border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-indigo-600 transition-all duration-300 transform hover:-translate-y-1 mx-2"
+                  >
+                    Contact Me
+                  </button>
+                </div>
+
+                <div className="flex justify-center space-x-6 mt-8">
+                  {/* Your social links (same as before) */}
+                </div>
+              </div>
+
+              <div className="absolute bottom-10 left-0 right-0 flex justify-center animate-bounce">
+                <button
+                  onClick={() => scrollToSection('about')}
+                  className="text-white opacity-75 hover:opacity-100 transition-opacity"
+                  aria-label="Scroll down"
+                >
+                  <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                  </svg>
+                </button>
+              </div>
+            </section>
+
+
+            {/* About Section */}
+
+            <section id="about" className="py-16 md:py-24 bg-white dark:bg-gray-900 p-4 relative overflow-hidden">
+              <ScrollingBioSection
+                bio={bioData}
+                stats={statData}
+                skills={skillsData}
+                timeline={timelineData}
               />
-            </div>
-            <h1 className="text-5xl md:text-6xl font-extrabold mb-4 leading-tight">
-              Hi, I'm <AnimatedName name={profile.name} />
-            </h1>
-            <p className="text-2xl md:text-3xl font-light mb-8">
-              <TypewriterEffect
-                text={roleTitles}
-                typingSpeed={70}
-                pauseTime={2000}
-              />
-            </p>
-
-            <div className="mt-10 space-y-4">
-              <button
-                onClick={() => scrollToSection('projects')}
-                className="px-8 py-3 bg-white text-indigo-600 font-bold rounded-full hover:bg-indigo-100 transition-all duration-300 transform hover:-translate-y-1 shadow-lg mx-2"
-              >
-                View My Work
-              </button>
-
-              <button
-                onClick={() => scrollToSection('contact')}
-                className="px-8 py-3 bg-transparent border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-indigo-600 transition-all duration-300 transform hover:-translate-y-1 mx-2"
-              >
-                Contact Me
-              </button>
-            </div>
-
-            <div className="flex justify-center space-x-6 mt-8">
-              {/* Your social links (same as before) */}
-            </div>
-          </div>
-
-          <div className="absolute bottom-10 left-0 right-0 flex justify-center animate-bounce">
-            <button
-              onClick={() => scrollToSection('about')}
-              className="text-white opacity-75 hover:opacity-100 transition-opacity"
-              aria-label="Scroll down"
-            >
-              <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-              </svg>
-            </button>
-          </div>
-        </section>
-
-
-        {/* About Section */}
-
-        <section id="about" className="py-16 md:py-24 bg-white dark:bg-gray-900 p-4 relative overflow-hidden">
-          <ScrollingBioSection
-            bio={bioData}
-            stats={statData}
-            skills={skillsData}
-            timeline={timelineData}
-          />
-        </section>
+            </section>
 
 
 
-        {/* Update the Skills section to use Interactive Skills */}
+            {/* Update the Skills section to use Interactive Skills */}
 
 
-        {/* --- My Skills Section (Interactive Only) --- */}
-        <section id="skills" className="py-16 md:py-24 bg-gray-100 dark:bg-gray-800 p-4 relative z-10">
-          <div className="container mx-auto max-w-4xl relative">
-            <div className="bubble absolute -top-10 -left-10 w-20 h-20 bg-indigo-500/10 rounded-full"></div>
-            <div className="bubble absolute top-1/2 -right-10 w-32 h-32 bg-purple-500/10 rounded-full" style={{ animationDelay: "2s" }}></div>
+            {/* --- My Skills Section (Interactive Only) --- */}
+            <section id="skills" className="py-16 md:py-24 bg-gray-100 dark:bg-gray-800 p-4 relative z-10">
+              <div className="container mx-auto max-w-4xl relative">
+                <div className="bubble absolute -top-10 -left-10 w-20 h-20 bg-indigo-500/10 rounded-full"></div>
+                <div className="bubble absolute top-1/2 -right-10 w-32 h-32 bg-purple-500/10 rounded-full" style={{ animationDelay: "2s" }}></div>
 
-            <h2 className="text-4xl font-bold text-center text-indigo-700 dark:text-indigo-400 mb-12">My Skills</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {/* Programming Skills */}
-              <div className="bg-white dark:bg-gray-850 p-6 rounded-lg shadow-lg hover-lift transition-all duration-300">
-                <h3 className="text-2xl font-semibold text-indigo-600 dark:text-indigo-400 mb-4 capitalize flex items-center">
-                  <Code className="w-6 h-6 mr-2" />
-                  Programming Skills
-                </h3>
-                <div className="space-y-4">
-                  {skillLevels.programming && Object.entries(skillLevels.programming).map(([skill, level], idx) => (
-                    <InteractiveSkill key={idx} skill={skill} level={level} icon={Code} color="indigo" />
+                <h2 className="text-4xl font-bold text-center text-indigo-700 dark:text-indigo-400 mb-12">My Skills</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                  {/* Programming Skills */}
+                  <div className="bg-white dark:bg-gray-850 p-6 rounded-lg shadow-lg hover-lift transition-all duration-300">
+                    <h3 className="text-2xl font-semibold text-indigo-600 dark:text-indigo-400 mb-4 capitalize flex items-center">
+                      <Code className="w-6 h-6 mr-2" />
+                      Programming Skills
+                    </h3>
+                    <div className="space-y-4">
+                      {skillLevels.programming && Object.entries(skillLevels.programming).map(([skill, level], idx) => (
+                        <InteractiveSkill key={idx} skill={skill} level={level} icon={Code} color="indigo" />
+                      ))}
+                    </div>
+                  </div>
+                  {/* Frameworks Skills */}
+                  <div className="bg-white dark:bg-gray-850 p-6 rounded-lg shadow-lg hover-lift transition-all duration-300">
+                    <h3 className="text-2xl font-semibold text-indigo-600 dark:text-indigo-400 mb-4 capitalize flex items-center">
+                      <Lightbulb className="w-6 h-6 mr-2" />
+                      Frameworks Skills
+                    </h3>
+                    <div className="space-y-4">
+                      {skillLevels.frameworks && Object.entries(skillLevels.frameworks).map(([skill, level], idx) => (
+                        <InteractiveSkill key={idx} skill={skill} level={level} icon={Lightbulb} color="purple" />
+                      ))}
+                    </div>
+                  </div>
+                  {/* Databases Skills */}
+                  <div className="bg-white dark:bg-gray-850 p-6 rounded-lg shadow-lg hover-lift transition-all duration-300">
+                    <h3 className="text-2xl font-semibold text-indigo-600 dark:text-indigo-400 mb-4 capitalize flex items-center">
+                      <Database className="w-6 h-6 mr-2" />
+                      Database Skills
+                    </h3>
+                    <div className="space-y-4">
+                      {skillLevels.databases && Object.entries(skillLevels.databases).map(([skill, level], idx) => (
+                        <InteractiveSkill key={idx} skill={skill} level={level} icon={Database} color="blue" />
+                      ))}
+                    </div>
+                  </div>
+                  {/* AI/ML Skills */}
+                  <div className="bg-white dark:bg-gray-850 p-6 rounded-lg shadow-lg hover-lift transition-all duration-300">
+                    <h3 className="text-2xl font-semibold text-indigo-600 dark:text-indigo-400 mb-4 capitalize flex items-center">
+                      <Brain className="w-6 h-6 mr-2" />
+                      AI/ML Skills
+                    </h3>
+                    <div className="space-y-4">
+                      {skillLevels.ai_ml && Object.entries(skillLevels.ai_ml).map(([skill, level], idx) => (
+                        <InteractiveSkill key={idx} skill={skill} level={level} icon={Brain} color="teal" />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Experience Section */}
+            <section id="experience" className="py-16 md:py-24 bg-white p-4">
+              <div className="container mx-auto max-w-4xl">
+                <h2 className="text-4xl font-bold text-center text-indigo-700 mb-12">Work Experience</h2>
+                <div className="space-y-8">
+                  {experience.map((job, index) => (
+                    <div key={index} className="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-indigo-500">
+                      <h3 className="text-2xl font-semibold text-gray-800 mb-2 flex items-center">
+                        <Briefcase className="w-6 h-6 mr-2 text-indigo-600" />
+                        {job.title} at {job.company}
+                      </h3>
+                      <p className="text-gray-600 mb-3">{job.duration} | {job.location}</p>
+                      <ul className="list-disc list-inside space-y-1 text-gray-700">
+                        {job.description.map((point, idx) => (
+                          <li key={idx}>{point}</li>
+                        ))}
+                      </ul>
+                    </div>
                   ))}
                 </div>
               </div>
-              {/* Frameworks Skills */}
-              <div className="bg-white dark:bg-gray-850 p-6 rounded-lg shadow-lg hover-lift transition-all duration-300">
-                <h3 className="text-2xl font-semibold text-indigo-600 dark:text-indigo-400 mb-4 capitalize flex items-center">
-                  <Lightbulb className="w-6 h-6 mr-2" />
-                  Frameworks Skills
-                </h3>
-                <div className="space-y-4">
-                  {skillLevels.frameworks && Object.entries(skillLevels.frameworks).map(([skill, level], idx) => (
-                    <InteractiveSkill key={idx} skill={skill} level={level} icon={Lightbulb} color="purple" />
+            </section>
+
+
+            <section id="projects">
+              <ProjectsSection projects={projects} />
+            </section>
+
+            {/* Education Section */}
+            <section id="education" className="py-16 md:py-24 bg-white p-4">
+              <div className="container mx-auto max-w-4xl">
+                <h2 className="text-4xl font-bold text-center text-indigo-700 mb-12">Education</h2>
+                <div className="space-y-8">
+                  {education.map((edu, index) => (
+                    <div key={index} className="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-green-500">
+                      <h3 className="text-2xl font-semibold text-gray-800 mb-2 flex items-center">
+                        <GraduationCap className="w-6 h-6 mr-2 text-green-600" />
+                        {edu.degree}
+                      </h3>
+                      <p className="text-gray-600 mb-1">{edu.institution}</p>
+                      <p className="text-gray-600 mb-3">{edu.duration} | {edu.location}</p>
+                      <p className="text-gray-700 font-medium mb-3">CGPA: {edu.gpa}</p>
+                      <ul className="list-disc list-inside space-y-1 text-gray-700">
+                        {edu.highlights.map((point, idx) => (
+                          <li key={idx}>{point}</li>
+                        ))}
+                      </ul>
+                    </div>
                   ))}
                 </div>
               </div>
-              {/* Databases Skills */}
-              <div className="bg-white dark:bg-gray-850 p-6 rounded-lg shadow-lg hover-lift transition-all duration-300">
-                <h3 className="text-2xl font-semibold text-indigo-600 dark:text-indigo-400 mb-4 capitalize flex items-center">
-                  <Database className="w-6 h-6 mr-2" />
-                  Database Skills
-                </h3>
-                <div className="space-y-4">
-                  {skillLevels.databases && Object.entries(skillLevels.databases).map(([skill, level], idx) => (
-                    <InteractiveSkill key={idx} skill={skill} level={level} icon={Database} color="blue" />
-                  ))}
-                </div>
-              </div>
-              {/* AI/ML Skills */}
-              <div className="bg-white dark:bg-gray-850 p-6 rounded-lg shadow-lg hover-lift transition-all duration-300">
-                <h3 className="text-2xl font-semibold text-indigo-600 dark:text-indigo-400 mb-4 capitalize flex items-center">
-                  <Brain className="w-6 h-6 mr-2" />
-                  AI/ML Skills
-                </h3>
-                <div className="space-y-4">
-                  {skillLevels.ai_ml && Object.entries(skillLevels.ai_ml).map(([skill, level], idx) => (
-                    <InteractiveSkill key={idx} skill={skill} level={level} icon={Brain} color="teal" />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Experience Section */}
-        <section id="experience" className="py-16 md:py-24 bg-white p-4">
-          <div className="container mx-auto max-w-4xl">
-            <h2 className="text-4xl font-bold text-center text-indigo-700 mb-12">Work Experience</h2>
-            <div className="space-y-8">
-              {experience.map((job, index) => (
-                <div key={index} className="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-indigo-500">
-                  <h3 className="text-2xl font-semibold text-gray-800 mb-2 flex items-center">
-                    <Briefcase className="w-6 h-6 mr-2 text-indigo-600" />
-                    {job.title} at {job.company}
-                  </h3>
-                  <p className="text-gray-600 mb-3">{job.duration} | {job.location}</p>
-                  <ul className="list-disc list-inside space-y-1 text-gray-700">
-                    {job.description.map((point, idx) => (
-                      <li key={idx}>{point}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+            </section>
 
 
-        <section id="projects">
-          <ProjectsSection projects={projects} />
-        </section>
+            {/* Certificates Section */}
+            <section id="certificates" className="py-16 md:py-24 bg-gray-100 dark:bg-gray-800 p-4">
+              <CertificatesSection certificates={certificates} />
+            </section>
 
-        {/* Education Section */}
-        <section id="education" className="py-16 md:py-24 bg-white p-4">
-          <div className="container mx-auto max-w-4xl">
-            <h2 className="text-4xl font-bold text-center text-indigo-700 mb-12">Education</h2>
-            <div className="space-y-8">
-              {education.map((edu, index) => (
-                <div key={index} className="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-green-500">
-                  <h3 className="text-2xl font-semibold text-gray-800 mb-2 flex items-center">
-                    <GraduationCap className="w-6 h-6 mr-2 text-green-600" />
-                    {edu.degree}
-                  </h3>
-                  <p className="text-gray-600 mb-1">{edu.institution}</p>
-                  <p className="text-gray-600 mb-3">{edu.duration} | {edu.location}</p>
-                  <p className="text-gray-700 font-medium mb-3">CGPA: {edu.gpa}</p>
-                  <ul className="list-disc list-inside space-y-1 text-gray-700">
-                    {edu.highlights.map((point, idx) => (
-                      <li key={idx}>{point}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+            {/* Strengths Section */}
+            <section id="strengths" className="py-16 md:py-24 bg-white dark:bg-gray-900 p-4">
+              <StrengthsSection strengths={strengths} />
+            </section>
 
-        
-        {/* Certificates Section */}
-        <section id="certificates" className="py-16 md:py-24 bg-gray-100 dark:bg-gray-800 p-4">
-          <CertificatesSection certificates={certificates} />
-        </section>
-
-        {/* Strengths Section */}
-        <section id="strengths" className="py-16 md:py-24 bg-white dark:bg-gray-900 p-4">
-          <StrengthsSection strengths={strengths} />
-        </section>
-
-        {/* Hobbies Section */}
+            {/* Hobbies Section */}
 
 
-        <section id="hobbies" className="py-16 md:py-24 bg-gray-100 dark:bg-gray-800 p-4 relative overflow-hidden">
-          {/* Interactive background shapes */}
-          <div className="absolute top-0 left-0 w-40 h-40 bg-indigo-300/10 dark:bg-indigo-500/20 rounded-full -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
-          <div className="absolute top-1/4 right-1/5 w-24 h-24 bg-purple-300/10 dark:bg-purple-500/20 rounded-full translate-y-1/4 animate-float" style={{ animationDelay: "1.5s" }}></div>
-          <div className="absolute bottom-0 right-0 w-72 h-72 bg-pink-300/10 dark:bg-pink-500/20 rounded-full translate-x-1/4 translate-y-1/4 animate-pulse" style={{ animationDelay: "2s" }}></div>
+            <section id="hobbies" className="py-16 md:py-24 bg-gray-100 dark:bg-gray-800 p-4 relative overflow-hidden">
+              {/* Interactive background shapes */}
+              <div className="absolute top-0 left-0 w-40 h-40 bg-indigo-300/10 dark:bg-indigo-500/20 rounded-full -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
+              <div className="absolute top-1/4 right-1/5 w-24 h-24 bg-purple-300/10 dark:bg-purple-500/20 rounded-full translate-y-1/4 animate-float" style={{ animationDelay: "1.5s" }}></div>
+              <div className="absolute bottom-0 right-0 w-72 h-72 bg-pink-300/10 dark:bg-pink-500/20 rounded-full translate-x-1/4 translate-y-1/4 animate-pulse" style={{ animationDelay: "2s" }}></div>
 
-          <div className="container mx-auto max-w-5xl relative z-10">
-            <h2 className="text-4xl font-bold text-center text-indigo-700 dark:text-indigo-400 mb-6">
-              My <AnimatedName name="Hobbies" />
-            </h2>
-            <p className="text-lg text-center text-gray-600 dark:text-gray-300 mb-16 max-w-xl mx-auto">
-              <TypewriterEffect
-                text={[
-                  "When I'm not coding, you'll find me enjoying these activities that help me stay creative.",
-                  "These hobbies keep me balanced and bring fresh perspectives to my work.",
-                  "Exploring different interests helps me think outside the box and solve problems creatively.",
-                  "Finding time for these activities keeps me inspired and energized.",
-                ]}
-                typingSpeed={70}
-                pauseTime={3000}
-              />
-            </p>
+              <div className="container mx-auto max-w-5xl relative z-10">
+                <h2 className="text-4xl font-bold text-center text-indigo-700 dark:text-indigo-400 mb-6">
+                  My <AnimatedName name="Hobbies" />
+                </h2>
+                <p className="text-lg text-center text-gray-600 dark:text-gray-300 mb-16 max-w-xl mx-auto">
+                  <TypewriterEffect
+                    text={[
+                      "When I'm not coding, you'll find me enjoying these activities that help me stay creative.",
+                      "These hobbies keep me balanced and bring fresh perspectives to my work.",
+                      "Exploring different interests helps me think outside the box and solve problems creatively.",
+                      "Finding time for these activities keeps me inspired and energized.",
+                    ]}
+                    typingSpeed={70}
+                    pauseTime={3000}
+                  />
+                </p>
 
-            {/* Staggered card layout to prevent overlap */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-12 md:gap-6">
-              {hobbies.map((hobby, index) => (
-                <div key={index} className="perspective-500 hobby-card-wrapper relative"
-                  style={{ marginTop: index % 2 === 1 ? '2rem' : '0' }}>
-                  <div className="card-inner relative w-full h-full transition-transform duration-1000"
-                    id={`card-inner-${index}`}>
+                {/* Staggered card layout to prevent overlap */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-12 md:gap-6">
+                  {hobbies.map((hobby, index) => (
+                    <div key={index} className="perspective-500 hobby-card-wrapper relative"
+                      style={{ marginTop: index % 2 === 1 ? '2rem' : '0' }}>
+                      <div className="card-inner relative w-full h-full transition-transform duration-1000"
+                        id={`card-inner-${index}`}>
 
-                    {/* Front of card */}
-                    <div className="card-front absolute w-full h-full backface-hidden">
-  <div className="hobby-card bg-white dark:bg-gray-800 rounded-xl h-full
+                        {/* Front of card */}
+                        <div className="card-front absolute w-full h-full backface-hidden">
+                          <div className="hobby-card bg-white dark:bg-gray-800 rounded-xl h-full
            group transition-all duration-500 transform hover:-translate-y-2">{/* Header with gradient remains the same */}
-                        <div className={`h-28 flex items-center justify-center bg-gradient-to-r 
+                            <div className={`h-28 flex items-center justify-center bg-gradient-to-r 
                           ${index % 4 === 0 ? 'from-indigo-500 to-purple-600' : ''}
                           ${index % 4 === 1 ? 'from-green-500 to-teal-600' : ''}
                           ${index % 4 === 2 ? 'from-rose-500 to-pink-600' : ''}
                           ${index % 4 === 3 ? 'from-amber-500 to-orange-600' : ''}
                           overflow-hidden relative`}>
 
-                          {/* Animated decorative elements */}
-                          <div className="absolute top-0 left-0 w-full h-full opacity-20">
-                            <div className="absolute top-1/4 left-1/4 w-12 h-12 rounded-full bg-white/30 transform scale-0 group-hover:scale-100 transition-transform duration-700 delay-100"></div>
-                            <div className="absolute bottom-1/4 right-1/4 w-8 h-8 rounded-full bg-white/20 transform scale-0 group-hover:scale-100 transition-transform duration-700 delay-200"></div>
-                          </div>
+                              {/* Animated decorative elements */}
+                              <div className="absolute top-0 left-0 w-full h-full opacity-20">
+                                <div className="absolute top-1/4 left-1/4 w-12 h-12 rounded-full bg-white/30 transform scale-0 group-hover:scale-100 transition-transform duration-700 delay-100"></div>
+                                <div className="absolute bottom-1/4 right-1/4 w-8 h-8 rounded-full bg-white/20 transform scale-0 group-hover:scale-100 transition-transform duration-700 delay-200"></div>
+                              </div>
 
-                          {/* Updated icons */}
-                          <div className="text-white transform group-hover:scale-125 group-hover:rotate-3 transition-all duration-500">
-                            {hobby.icon}
-                          </div>
-                        </div>
+                              {/* Updated icons */}
+                              <div className="text-white transform group-hover:scale-125 group-hover:rotate-3 transition-all duration-500">
+                                {hobby.icon}
+                              </div>
+                            </div>
 
-                        {/* Card body with animated content reveal */}
-                        <div className="p-6 text-center flex flex-col h-[calc(100%-7rem)] bg-white dark:bg-gray-800">
+                            {/* Card body with animated content reveal */}
+                            <div className="p-6 text-center flex flex-col h-[calc(100%-7rem)] bg-white dark:bg-gray-800">
 
-                          <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-3">
-                            {hobby.name}
-                          </h3>
-                          <div className="flex-grow overflow-hidden mb-4">
-                            <p className="text-gray-600 dark:text-gray-300 text-sm">
-                              {hobby.description}
-                            </p>
-                          </div>
+                              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-3">
+                                {hobby.name}
+                              </h3>
+                              <div className="flex-grow overflow-hidden mb-4">
+                                <p className="text-gray-600 dark:text-gray-300 text-sm">
+                                  {hobby.description}
+                                </p>
+                              </div>
 
-                          {/* Interactive button that appears on hover */}
-                          <div className="mt-auto opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                            <button
-                              onClick={() => {
-                                document.getElementById(`card-inner-${index}`).style.transform = 'rotateY(180deg)';
-                              }}
-                              className={`text-xs font-medium py-1 px-4 rounded-full
+                              {/* Interactive button that appears on hover */}
+                              <div className="mt-auto opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                                <button
+                                  onClick={() => {
+                                    document.getElementById(`card-inner-${index}`).style.transform = 'rotateY(180deg)';
+                                  }}
+                                  className={`text-xs font-medium py-1 px-4 rounded-full
                               ${index % 4 === 0 ? 'bg-indigo-100 text-indigo-700 hover:bg-indigo-200' : ''}
                               ${index % 4 === 1 ? 'bg-green-100 text-green-700 hover:bg-green-200' : ''}
                               ${index % 4 === 2 ? 'bg-rose-100 text-rose-700 hover:bg-rose-200' : ''}
                               ${index % 4 === 3 ? 'bg-amber-100 text-amber-700 hover:bg-amber-200' : ''}
                             `}
-                            >
-                              Learn more
-                            </button>
+                                >
+                                  Learn more
+                                </button>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
 
-                    {/* Back of card */}
-                   <div className="card-back absolute w-full h-full backface-hidden rotate-y-180">
-  <div className="hobby-card bg-white dark:bg-gray-750 rounded-xl h-full
+                        {/* Back of card */}
+                        <div className="card-back absolute w-full h-full backface-hidden rotate-y-180">
+                          <div className="hobby-card bg-white dark:bg-gray-750 rounded-xl h-full
            flex flex-col p-6">
-  
-                        <h3 className={`text-xl font-semibold mb-4 ${index % 4 === 0 ? 'text-indigo-700 dark:text-indigo-400' :
-                            index % 4 === 1 ? 'text-green-700 dark:text-green-400' :
-                              index % 4 === 2 ? 'text-rose-700 dark:text-rose-400' :
-                                'text-amber-700 dark:text-amber-400'
-                          }`}>
-                          About {hobby.name}
-                        </h3>
-                        <p className="text-gray-700 dark:text-gray-300 text-sm flex-grow overflow-y-auto">
-                          {hobby.extendedDescription || `${hobby.description} This is something I truly enjoy in my spare time and helps me maintain balance in life.`}
-                        </p>
-                        <button
-      onClick={() => {
-        const card = document.getElementById(`card-inner-${index}`);
-        if (card) card.style.transform = 'rotateY(0deg)';
-      }}
-      className={`mt-4 text-xs font-medium py-1 px-4 rounded-full self-center
+
+                            <h3 className={`text-xl font-semibold mb-4 ${index % 4 === 0 ? 'text-indigo-700 dark:text-indigo-400' :
+                              index % 4 === 1 ? 'text-green-700 dark:text-green-400' :
+                                index % 4 === 2 ? 'text-rose-700 dark:text-rose-400' :
+                                  'text-amber-700 dark:text-amber-400'
+                              }`}>
+                              About {hobby.name}
+                            </h3>
+                            <p className="text-gray-700 dark:text-gray-300 text-sm flex-grow overflow-y-auto">
+                              {hobby.extendedDescription || `${hobby.description} This is something I truly enjoy in my spare time and helps me maintain balance in life.`}
+                            </p>
+                            <button
+                              onClick={() => {
+                                const card = document.getElementById(`card-inner-${index}`);
+                                if (card) card.style.transform = 'rotateY(0deg)';
+                              }}
+                              className={`mt-4 text-xs font-medium py-1 px-4 rounded-full self-center
       ${index % 4 === 0 ? 'bg-indigo-200 text-indigo-800 hover:bg-indigo-300' : ''}
       ${index % 4 === 1 ? 'bg-green-200 text-green-800 hover:bg-green-300' : ''}
       ${index % 4 === 2 ? 'bg-rose-200 text-rose-800 hover:bg-rose-300' : ''}
       ${index % 4 === 3 ? 'bg-amber-200 text-amber-800 hover:bg-amber-300' : ''}
     `}
-    >
-                          Back
-                        </button>
+                            >
+                              Back
+                            </button>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
 
-                  {/* Decorative shape behind card only visible on hover */}
-                  <div className={`absolute -z-10 inset-0 -m-3 rounded-xl transform scale-90 opacity-0 group-hover:opacity-50 group-hover:scale-105 transition-all duration-500
+                      {/* Decorative shape behind card only visible on hover */}
+                      <div className={`absolute -z-10 inset-0 -m-3 rounded-xl transform scale-90 opacity-0 group-hover:opacity-50 group-hover:scale-105 transition-all duration-500
                   ${index % 4 === 0 ? 'bg-indigo-200/30 dark:bg-indigo-900/30' : ''}
                   ${index % 4 === 1 ? 'bg-green-200/30 dark:bg-green-900/30' : ''}
                   ${index % 4 === 2 ? 'bg-rose-200/30 dark:bg-rose-900/30' : ''}
                   ${index % 4 === 3 ? 'bg-amber-200/30 dark:bg-amber-900/30' : ''}
                 `}></div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
+              </div>
+            </section>
 
 
-        {/* Contact Section */}
-        <section id="contact" className="relative py-16 md:py-24 bg-gradient-animated text-white p-4 min-h-[80vh] flex items-center">
-          <ButterflyEffect />
-          <ContactFloatingElements />
+            {/* Contact Section */}
+            <section id="contact" className="relative py-16 md:py-24 bg-gradient-animated text-white p-4 min-h-[80vh] flex items-center">
+              <ButterflyEffect />
+              <ContactFloatingElements />
 
-          <div className="container mx-auto max-w-4xl relative z-10">
-            <h1 className="text-4xl md:text-5xl font-extrabold text-center mb-6">
-              Let's <AnimatedName name="Connect" />
-            </h1>
-            <p className="text-xl md:text-2xl font-light mb-10 text-center">
-              <TypewriterEffect
-                text={[
-                  "Have a project in mind? Let's discuss it!",
-                  "Looking for a skilled developer for your team?",
-                  "Need help with your Java or Spring Boot project?",
-                  "Want to know more about my experience?",
-                  "Ready to collaborate on something awesome?"
-                ]}
-                typingSpeed={60}
-                pauseTime={2000}
-              />
-            </p>
-            <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-2xl p-6 md:p-8 transform transition-all duration-300 hover:scale-[1.01]">
-              <ContactForm
-                profile={profile.contact}
-                references={references}
-              />
-            </div>
+              <div className="container mx-auto max-w-4xl relative z-10">
+                <h1 className="text-4xl md:text-5xl font-extrabold text-center mb-6">
+                  Let's <AnimatedName name="Connect" />
+                </h1>
+                <p className="text-xl md:text-2xl font-light mb-10 text-center">
+                  <TypewriterEffect
+                    text={[
+                      "Have a project in mind? Let's discuss it!",
+                      "Looking for a skilled developer for your team?",
+                      "Need help with your Java or Spring Boot project?",
+                      "Want to know more about my experience?",
+                      "Ready to collaborate on something awesome?"
+                    ]}
+                    typingSpeed={60}
+                    pauseTime={2000}
+                  />
+                </p>
+                <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-2xl p-6 md:p-8 transform transition-all duration-300 hover:scale-[1.01]">
+                  <ContactForm
+                    profile={profile.contact}
+                    references={references}
+                  />
+                </div>
 
 
-          </div>
-          <div className="absolute bottom-8 left-0 right-0 flex justify-center animate-bounce">
-            <button
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="text-white opacity-70 hover:opacity-100 transition-opacity"
-              aria-label="Scroll to top"
-            >
-              <svg className="w-10 h-10 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-              </svg>
-            </button>
-          </div>
-        </section>
-      </main>
+              </div>
+              <div className="absolute bottom-8 left-0 right-0 flex justify-center animate-bounce">
+                <button
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                  className="text-white opacity-70 hover:opacity-100 transition-opacity"
+                  aria-label="Scroll to top"
+                >
+                  <svg className="w-10 h-10 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                  </svg>
+                </button>
+              </div>
+            </section>
+          </main>
 
           {/* Footer */}
           <Footer profile={profile.contact} />

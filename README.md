@@ -70,7 +70,6 @@ npm run build
 │   ├── styles/              # CSS styles
 │   └── App.js               # Main application component
 ├── public/                  # Static assets
-├── ai-portfolio/            # Original AI portfolio files
 └── build/                   # Production build files
 ```
 
