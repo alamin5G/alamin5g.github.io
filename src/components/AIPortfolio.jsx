@@ -30,8 +30,128 @@ const AIPortfolio = () => {
     const [output, setOutput] = useState(INITIAL_OUTPUT);
     const [history, setHistory] = useState([]);
     const [historyIndex, setHistoryIndex] = useState(-1);
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const [particles, setParticles] = useState([]);
+    const [clicks, setClicks] = useState([]);
     const inputRef = useRef(null);
     const terminalBodyRef = useRef(null);
+
+    // Initialize particles
+    useEffect(() => {
+        const initialParticles = Array.from({ length: 15 }, (_, i) => ({
+            id: i,
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            vx: (Math.random() - 0.5) * 2,
+            vy: (Math.random() - 0.5) * 2,
+            size: Math.random() * 4 + 2,
+            color: ['cyan', 'purple', 'pink', 'yellow', 'green', 'blue'][Math.floor(Math.random() * 6)],
+            opacity: Math.random() * 0.8 + 0.2
+        }));
+        setParticles(initialParticles);
+    }, []);
+
+    // Mouse tracking
+    useEffect(() => {
+        const handleMouseMove = (e) => {
+            setMousePosition({ x: e.clientX, y: e.clientY });
+
+            // Create trailing particles occasionally
+            if (Math.random() < 0.1) {
+                const newParticle = {
+                    id: Date.now(),
+                    x: e.clientX,
+                    y: e.clientY,
+                    vx: (Math.random() - 0.5) * 3,
+                    vy: (Math.random() - 0.5) * 3,
+                    size: Math.random() * 3 + 1,
+                    color: ['cyan', 'purple', 'pink'][Math.floor(Math.random() * 3)],
+                    opacity: 0.8,
+                    life: 100
+                };
+                setParticles(prev => [...prev.slice(-20), newParticle]);
+            }
+        };
+
+        const handleClick = (e) => {
+            const clickEffect = {
+                id: Date.now(),
+                x: e.clientX,
+                y: e.clientY,
+                size: 0
+            };
+            setClicks(prev => [...prev, clickEffect]);
+
+            // Remove click effect after animation
+            setTimeout(() => {
+                setClicks(prev => prev.filter(click => click.id !== clickEffect.id));
+            }, 1000);
+
+            // Create burst of particles on click
+            const burstParticles = Array.from({ length: 8 }, (_, i) => ({
+                id: Date.now() + i,
+                x: e.clientX,
+                y: e.clientY,
+                vx: Math.cos(i * Math.PI / 4) * 5,
+                vy: Math.sin(i * Math.PI / 4) * 5,
+                size: Math.random() * 4 + 2,
+                color: ['cyan', 'purple', 'pink', 'yellow'][Math.floor(Math.random() * 4)],
+                opacity: 1,
+                life: 60
+            }));
+            setParticles(prev => [...prev, ...burstParticles]);
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('click', handleClick);
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('click', handleClick);
+        };
+    }, []);
+
+    // Animate particles
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setParticles(prev => prev.map(particle => {
+                let newX = particle.x + particle.vx;
+                let newY = particle.y + particle.vy;
+                let newVx = particle.vx;
+                let newVy = particle.vy;
+
+                // Bounce off walls
+                if (newX <= 0 || newX >= window.innerWidth) {
+                    newVx = -newVx;
+                    newX = Math.max(0, Math.min(window.innerWidth, newX));
+                }
+                if (newY <= 0 || newY >= window.innerHeight) {
+                    newVy = -newVy;
+                    newY = Math.max(0, Math.min(window.innerHeight, newY));
+                }
+
+                // Attract to mouse
+                const dx = mousePosition.x - newX;
+                const dy = mousePosition.y - newY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < 150) {
+                    newVx += dx * 0.0005;
+                    newVy += dy * 0.0005;
+                }
+
+                return {
+                    ...particle,
+                    x: newX,
+                    y: newY,
+                    vx: newVx * 0.99, // Add friction
+                    vy: newVy * 0.99,
+                    life: particle.life ? particle.life - 1 : particle.life,
+                    opacity: particle.life ? particle.opacity * 0.98 : particle.opacity
+                };
+            }).filter(particle => !particle.life || particle.life > 0));
+        }, 16);
+
+        return () => clearInterval(interval);
+    }, [mousePosition]);
 
     useEffect(() => {
         inputRef.current?.focus();
@@ -283,29 +403,100 @@ const AIPortfolio = () => {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-900 to-pink-900 p-4 relative overflow-hidden">
-            {/* Dynamic animated background */}
-            <div className="fixed inset-0 opacity-20">
-                {/* Floating particles */}
+            {/* Interactive Particle System */}
+            <div className="fixed inset-0 pointer-events-none z-0">
+                {/* Mouse cursor effect */}
+                <div
+                    className="absolute w-8 h-8 border-2 border-cyan-400/50 rounded-full"
+                    style={{
+                        left: mousePosition.x - 16,
+                        top: mousePosition.y - 16,
+                        transition: 'all 0.1s ease-out'
+                    }}
+                ></div>
+
+                {/* Dynamic particles */}
+                {particles.map(particle => (
+                    <div
+                        key={particle.id}
+                        className={`absolute rounded-full bg-${particle.color}-400`}
+                        style={{
+                            left: particle.x,
+                            top: particle.y,
+                            width: particle.size,
+                            height: particle.size,
+                            opacity: particle.opacity,
+                            transform: 'translate(-50%, -50%)',
+                            transition: 'opacity 0.1s ease-out'
+                        }}
+                    ></div>
+                ))}
+
+                {/* Click effects */}
+                {clicks.map(click => (
+                    <div
+                        key={click.id}
+                        className="absolute border-2 border-cyan-400 rounded-full animate-ping"
+                        style={{
+                            left: click.x - 25,
+                            top: click.y - 25,
+                            width: 50,
+                            height: 50
+                        }}
+                    ></div>
+                ))}
+
+                {/* Static animated elements */}
                 <div className="absolute w-2 h-2 bg-cyan-400 rounded-full animate-pulse" style={{ left: '10%', top: '20%', animationDelay: '0s' }}></div>
                 <div className="absolute w-1 h-1 bg-pink-400 rounded-full animate-ping" style={{ left: '80%', top: '30%', animationDelay: '1s' }}></div>
                 <div className="absolute w-3 h-3 bg-yellow-400 rounded-full animate-bounce" style={{ left: '60%', top: '70%', animationDelay: '2s' }}></div>
-                <div className="absolute w-2 h-2 bg-green-400 rounded-full animate-pulse" style={{ left: '30%', top: '80%', animationDelay: '3s' }}></div>
-                <div className="absolute w-1 h-1 bg-blue-400 rounded-full animate-ping" style={{ left: '90%', top: '60%', animationDelay: '4s' }}></div>
-                <div className="absolute w-2 h-2 bg-purple-400 rounded-full animate-bounce" style={{ left: '20%', top: '40%', animationDelay: '5s' }}></div>
 
-                {/* Geometric shapes */}
-                <div className="absolute w-20 h-20 border border-cyan-400/30 rotate-45 animate-spin-slow" style={{ left: '70%', top: '10%' }}></div>
-                <div className="absolute w-16 h-16 border border-pink-400/30 rounded-full animate-pulse" style={{ left: '10%', top: '60%' }}></div>
-                <div className="absolute w-12 h-12 border-2 border-yellow-400/30 rotate-12 animate-ping" style={{ left: '85%', top: '80%' }}></div>
+                {/* Geometric shapes that follow mouse */}
+                <div
+                    className="absolute w-20 h-20 border border-cyan-400/30 rotate-45 transition-all duration-500"
+                    style={{
+                        left: `${20 + (mousePosition.x / window.innerWidth) * 30}%`,
+                        top: `${10 + (mousePosition.y / window.innerHeight) * 20}%`,
+                        transform: `rotate(${45 + (mousePosition.x / 10)}deg)`
+                    }}
+                ></div>
+                <div
+                    className="absolute w-16 h-16 border border-pink-400/30 rounded-full transition-all duration-700"
+                    style={{
+                        left: `${60 - (mousePosition.x / window.innerWidth) * 20}%`,
+                        top: `${50 + (mousePosition.y / window.innerHeight) * 30}%`,
+                        transform: `scale(${1 + (mousePosition.x / window.innerWidth) * 0.5})`
+                    }}
+                ></div>
+
+                {/* Wave effect */}
+                <div className="absolute inset-0 opacity-10">
+                    <svg width="100%" height="100%" className="animate-pulse">
+                        <defs>
+                            <radialGradient id="waveGradient">
+                                <stop offset="0%" stopColor="cyan" />
+                                <stop offset="50%" stopColor="purple" />
+                                <stop offset="100%" stopColor="pink" />
+                            </radialGradient>
+                        </defs>
+                        <circle
+                            cx={mousePosition.x}
+                            cy={mousePosition.y}
+                            r="100"
+                            fill="none"
+                            stroke="url(#waveGradient)"
+                            strokeWidth="2"
+                            className="animate-ping"
+                        />
+                    </svg>
+                </div>
 
                 {/* Grid pattern overlay */}
                 <div className="absolute inset-0" style={{
                     backgroundImage: `linear-gradient(rgba(139, 92, 246, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(139, 92, 246, 0.1) 1px, transparent 1px)`,
                     backgroundSize: '30px 30px'
                 }}></div>
-            </div>
-
-            <div className="relative z-10 max-w-6xl mx-auto">
+            </div>            <div className="relative z-10 max-w-6xl mx-auto">
                 {/* Header */}
                 <div className="text-center mb-8">
                     <h1 className="text-5xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-4">
@@ -417,21 +608,109 @@ const AIPortfolio = () => {
                 </div>
 
 
-                <div className="mt-6 text-center text-purple-200 text-sm">
-                    <p>© 2024 Md. Alamin • AI-Powered Portfolio Assistant • Press ESC to return to main portfolio</p>
+            </div>
+
+            {/* Interactive Gaming Section */}
+            <div className="mt-6 bg-black/30 backdrop-blur-lg border border-cyan-500/30 rounded-xl p-4">
+                <div className="text-center mb-4">
+                    <h3 className="text-cyan-400 font-bold text-lg">Interactive Elements</h3>
+                    <p className="text-purple-200 text-sm">Click anywhere on the background to create particle bursts!</p>
+                </div>
+
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {/* Color Change Button */}
+                    <button
+                        onClick={() => {
+                            const colors = ['cyan', 'purple', 'pink', 'yellow', 'green', 'blue', 'red', 'orange'];
+                            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                            const newParticles = Array.from({ length: 10 }, (_, i) => ({
+                                id: Date.now() + i,
+                                x: Math.random() * window.innerWidth,
+                                y: Math.random() * window.innerHeight,
+                                vx: (Math.random() - 0.5) * 4,
+                                vy: (Math.random() - 0.5) * 4,
+                                size: Math.random() * 6 + 3,
+                                color: randomColor,
+                                opacity: 1,
+                                life: 120
+                            }));
+                            setParticles(prev => [...prev, ...newParticles]);
+                        }}
+                        className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-4 py-2 rounded-lg hover:scale-105 transform transition-all shadow-lg"
+                    >
+                        🎨 Color Burst
+                    </button>
+
+                    {/* Particle Storm */}
+                    <button
+                        onClick={() => {
+                            const stormParticles = Array.from({ length: 25 }, (_, i) => ({
+                                id: Date.now() + i,
+                                x: window.innerWidth / 2,
+                                y: window.innerHeight / 2,
+                                vx: (Math.random() - 0.5) * 8,
+                                vy: (Math.random() - 0.5) * 8,
+                                size: Math.random() * 5 + 2,
+                                color: ['cyan', 'purple', 'pink'][Math.floor(Math.random() * 3)],
+                                opacity: 1,
+                                life: 150
+                            }));
+                            setParticles(prev => [...prev, ...stormParticles]);
+                        }}
+                        className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-lg hover:scale-105 transform transition-all shadow-lg"
+                    >
+                        ⚡ Particle Storm
+                    </button>
+
+                    {/* Clear Particles */}
+                    <button
+                        onClick={() => setParticles([])}
+                        className="bg-gradient-to-r from-red-500 to-orange-500 text-white px-4 py-2 rounded-lg hover:scale-105 transform transition-all shadow-lg"
+                    >
+                        🧹 Clear All
+                    </button>
+
+                    {/* Fireworks */}
+                    <button
+                        onClick={() => {
+                            const fireworkCenters = [
+                                { x: window.innerWidth * 0.25, y: window.innerHeight * 0.3 },
+                                { x: window.innerWidth * 0.75, y: window.innerHeight * 0.3 },
+                                { x: window.innerWidth * 0.5, y: window.innerHeight * 0.5 }
+                            ];
+
+                            fireworkCenters.forEach((center, index) => {
+                                setTimeout(() => {
+                                    const fireworkParticles = Array.from({ length: 15 }, (_, i) => ({
+                                        id: Date.now() + index * 100 + i,
+                                        x: center.x,
+                                        y: center.y,
+                                        vx: Math.cos(i * Math.PI * 2 / 15) * 6,
+                                        vy: Math.sin(i * Math.PI * 2 / 15) * 6,
+                                        size: Math.random() * 4 + 3,
+                                        color: ['yellow', 'orange', 'red', 'pink'][Math.floor(Math.random() * 4)],
+                                        opacity: 1,
+                                        life: 100
+                                    }));
+                                    setParticles(prev => [...prev, ...fireworkParticles]);
+                                }, index * 300);
+                            });
+                        }}
+                        className="bg-gradient-to-r from-yellow-500 to-red-500 text-white px-4 py-2 rounded-lg hover:scale-105 transform transition-all shadow-lg"
+                    >
+                        🎆 Fireworks
+                    </button>
+                </div>
+
+                <div className="mt-4 text-center text-purple-200 text-xs">
+                    <p>💡 Try moving your mouse around the screen and clicking anywhere!</p>
+                    <p>🎮 Use the buttons above for different particle effects</p>
                 </div>
             </div>
 
-            {/* Custom CSS for animations */}
-            <style jsx>{`
-                @keyframes spin-slow {
-                    from { transform: rotate(0deg); }
-                    to { transform: rotate(360deg); }
-                }
-                .animate-spin-slow {
-                    animation: spin-slow 20s linear infinite;
-                }
-            `}</style>
+            <div className="mt-6 text-center text-purple-200 text-sm">
+                <p>© 2024 Md. Alamin • AI-Powered Portfolio Assistant • Press ESC to return to main portfolio</p>
+            </div>
         </div>
     );
 };
