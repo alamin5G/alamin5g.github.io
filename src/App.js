@@ -246,12 +246,12 @@ const App = () => {
         "Developed React (Vite) frontend for admin controls: deploy, rollback, backup triggers, dynamic offer management.",
         "Integrated secure password reset flow (email delivery via Postfix/Dovecot) and JWT-based authentication.",
         "Automated Docker-based deployment & rollback scripts plus database & code backup routines.",
-        "Unified pricing synchronization and real-time discount recalculation across environments." 
+        "Unified pricing synchronization and real-time discount recalculation across environments."
       ],
       technologies: ["Java", "Spring Boot", "MySQL", "Docker", "React.js", "Vite", "JWT", "REST API", "Shell Scripting"],
       githubUrl: "https://github.com/alamin5g/CodeLessBD", // Replace if different
       liveUrl: "https://codelessbd.com/", // Replace with actual live URL if needed
-      image: "/images/codelessbd_logo.svg", // Added SVG logo asset
+      image: "/images/codelessbd_logo.png", // PNG logo asset
       featured: true
     },
     {
