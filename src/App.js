@@ -231,8 +231,27 @@ const App = () => {
       ],
       technologies: ["Python", "TensorFlow", "Keras", "FastAPI", "React.js", "Computer Vision", "Machine Learning", "Docker", "HTML5", "CSS3"],
       githubUrl: "https://github.com/alamin5G/Sortify",
-      liveUrl: "https://sortify.top/",
-      image: "https://sortify.top/static/media/logo.png", // Using Sortify's logo as preview
+      liveUrl: "https://sortifi.org/",
+      image: "https://sortifi.org/static/media/logo.png", // Updated domain
+      featured: true
+    },
+    {
+      name: "CodeLessBD - Subscription & Pricing Management Platform",
+      organization: "Personal / Production Deployment",
+      duration: "11/2024 - Present",
+      location: "Dhaka, Bangladesh",
+      description: [
+        "Engineered a full-stack platform for managing tiered pricing, offers, and subscription logic.",
+        "Implemented Spring Boot backend with robust RESTful APIs (pricing, discount recalculation, system settings).",
+        "Developed React (Vite) frontend for admin controls: deploy, rollback, backup triggers, dynamic offer management.",
+        "Integrated secure password reset flow (email delivery via Postfix/Dovecot) and JWT-based authentication.",
+        "Automated Docker-based deployment & rollback scripts plus database & code backup routines.",
+        "Unified pricing synchronization and real-time discount recalculation across environments." 
+      ],
+      technologies: ["Java", "Spring Boot", "MySQL", "Docker", "React.js", "Vite", "JWT", "REST API", "Shell Scripting"],
+      githubUrl: "https://github.com/alamin5g/CodeLessBD", // Replace if different
+      liveUrl: "https://codelessbd.com/", // Replace with actual live URL if needed
+      image: "/images/codelessbd_logo.svg", // Added SVG logo asset
       featured: true
     },
     {
