@@ -232,7 +232,7 @@ const App = () => {
       technologies: ["Python", "TensorFlow", "Keras", "FastAPI", "React.js", "Computer Vision", "Machine Learning", "Docker", "HTML5", "CSS3"],
       githubUrl: "https://github.com/alamin5G/Sortify",
       liveUrl: "https://sortifi.org/",
-      image: "https://sortifi.org/static/media/logo.png", // Updated domain
+      image: "https://og-image.vercel.app/**Sortify**%20-%20Waste%20Classification.png?theme=dark&md=1&fontSize=90px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fvercel-triangle-black.svg", // Website preview image
       featured: true
     },
     {
